@@ -1,0 +1,30 @@
+{
+  "name": "bytic/assert",
+  "description": "Bytic assert component",
+  "authors": [
+    {
+      "name": "Gabriel Solomon",
+      "email": "hello@gabrielsolomon.ro"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Bytic\\Assert\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Bytic\\Assert\\Tests\\": "tests/src"
+    }
+  },
+  "require": {
+    "php": "^7.4|^8.0",
+    "bytic/package-base": "^1.0",
+    "webmozart/assert": "^1.10"
+  },
+  "require-dev": {
+    "bytic/phpqatools": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
