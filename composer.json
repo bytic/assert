@@ -23,7 +23,8 @@
     "webmozart/assert": "^1.10"
   },
   "require-dev": {
-    "bytic/phpqatools": "^1.0"
+    "bytic/phpqatools": "^1.0",
+    "phpbench/phpbench": "^1.2"
   },
   "minimum-stability": "dev",
   "prefer-stable": true

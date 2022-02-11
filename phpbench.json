@@ -1,0 +1,16 @@
+{
+  "$schema": "./vendor/phpbench/phpbench/phpbench.schema.json",
+  "runner.bootstrap": "vendor/autoload.php",
+  "runner.path": "tests/benchmarks",
+  "report.generators": {
+    "html": {
+      "extends": "html",
+      "file": "tests/benchmarks/reports/report.html",
+      "title": "Hello World"
+    }
+  },
+  "runner.time_unit": "milliseconds",
+  "runner.php_config": {
+    "memory_limit": "512M"
+  }
+}
