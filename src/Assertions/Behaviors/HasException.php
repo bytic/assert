@@ -15,6 +15,11 @@ trait HasException
         return $this;
     }
 
+    public function throw($exception): void
+    {
+        $this->orThrow($exception);
+    }
+
     public function hasException(): bool
     {
         return $this->shouldWrapException === true;
