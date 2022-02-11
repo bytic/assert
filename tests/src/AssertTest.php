@@ -44,4 +44,14 @@ class AssertTest extends TestCase
             ->isBool()
             ->isFalse()->orFail('Failed');
     }
+
+    /** @test */
+    public function chainable_can_define_custom_exception()
+    {
+        static::expectException(\Psr\Log\InvalidArgumentException::class);
+
+        Assert::that(true)
+            ->isBool()
+            ->isFalse()->orThrow(\Psr\Log\InvalidArgumentException::class);
+    }
 }
