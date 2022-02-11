@@ -4,24 +4,19 @@ namespace Bytic\Assert\Assertor;
 
 class BaseAssertor extends AbstractAssertor
 {
-    public function boolean($value, $message = null, $exception = null)
+    use Checks\BooleanChecks;
+    use Checks\NumericChecks;
+    use Checks\StringChecks;
+
+    /**
+     * @param mixed $value
+     * @param string $message
+     */
+    public function object($value, $message = null, $exception = null)
     {
-        if (false === is_bool($value)) {
+        if (false === is_object($value)) {
             $this->reportInvalidArgument($message, $exception);
         }
     }
 
-    public function false($value, $message = null, $exception = null)
-    {
-        if (false !== $value) {
-            $this->reportInvalidArgument($message, $exception);
-        }
-    }
-
-    public function true($value, $message = null, $exception = null)
-    {
-        if (true !== $value) {
-            $this->reportInvalidArgument($message, $exception);
-        }
-    }
 }
