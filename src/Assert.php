@@ -2,13 +2,17 @@
 
 namespace Bytic\Assert;
 
-use Bytic\Assert\Assertor\AssertorInterface;
-use Bytic\Assert\Assertor\BaseAssertor;
+use Bytic\Assert\Assertions\AssertionChain;
 
 class Assert extends \Webmozart\Assert\Assert
 {
-    public static function that($value): Assertion
+    public static function that($value): AssertionChain
     {
-        return new Assertion($value);
+        return new AssertionChain($value);
+    }
+
+    public static function lazy()
+    {
+
     }
 }

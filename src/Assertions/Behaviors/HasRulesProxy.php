@@ -2,9 +2,8 @@
 
 namespace Bytic\Assert\Assertions\Behaviors;
 
-use Bytic\Assert\Assertion;
+use Bytic\Assert\Assertions\Assertion;
 use Bytic\Assert\Assertor\BaseAssertor;
-use Bytic\Assert\Assertor\WebmozartAssertor;
 
 /**
  * @method Assertion isNull()

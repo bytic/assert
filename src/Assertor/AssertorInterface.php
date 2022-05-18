@@ -2,7 +2,7 @@
 
 namespace Bytic\Assert\Assertor;
 
-use Bytic\Assert\Assertion;
+use Bytic\Assert\Assertions\Assertion;
 
 interface AssertorInterface
 {

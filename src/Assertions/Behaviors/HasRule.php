@@ -2,7 +2,7 @@
 
 namespace Bytic\Assert\Assertions\Behaviors;
 
-use Bytic\Assert\Assertion;
+use Bytic\Assert\Assertions\Assertion;
 
 trait HasRule
 {

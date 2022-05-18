@@ -3,17 +3,25 @@
 namespace Bytic\Assert\Tests;
 
 use Bytic\Assert\Assert;
-use Bytic\Assert\Assertion;
+use Bytic\Assert\Assertions\AssertionChain;
 use InvalidArgumentException;
 
 class AssertTest extends TestCase
 {
     /** @test */
+    public function that_returns_no_exception()
+    {
+        $assertion = Assert::that(true);
+
+        self::assertInstanceOf(AssertionChain::class, $assertion);
+    }
+
+    /** @test */
     public function that_returns_assertion()
     {
         $assertion = Assert::that(true)->isTrue();
 
-        self::assertInstanceOf(Assertion::class, $assertion);
+        self::assertInstanceOf(AssertionChain::class, $assertion);
     }
 
     /** @test */
@@ -41,8 +49,9 @@ class AssertTest extends TestCase
         static::expectExceptionMessage('Failed');
 
         Assert::that(true)
+            ->orFail('Failed')
             ->isBool()
-            ->isFalse()->orFail('Failed');
+            ->isFalse();
     }
 
     /** @test */
@@ -51,7 +60,9 @@ class AssertTest extends TestCase
         static::expectException(\Psr\Log\InvalidArgumentException::class);
 
         Assert::that(true)
+            ->orThrow(\Psr\Log\InvalidArgumentException::class)
             ->isBool()
-            ->isFalse()->orThrow(\Psr\Log\InvalidArgumentException::class);
+            ->isFalse()
+        ;
     }
 }

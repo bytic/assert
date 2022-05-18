@@ -2,99 +2,46 @@
 
 namespace Bytic\Assert\Assertions;
 
-
-use Bytic\Assert\Assertion;
-use Bytic\Assert\Assertor\AssertorInterface;
 use Bytic\Assert\Assertor\Assertors;
 
 class AssertionChain
 {
     use Behaviors\HasRulesProxy;
+    use Behaviors\HasException;
+    use Behaviors\HasAssertor;
 
     public string $assertor;
 
     public $value;
 
     /**
-     * @var Assertion[]
-     */
-    protected array $assertions = [];
-
-    /**
      * Creates a new assertion.
      * @param mixed $value
      */
-    public function __construct($value, $assertor)
+    public function __construct($value, $assertor = null)
     {
         $this->value = $value;
-        $this->assertor = $assertor;
-    }
-
-    public function addRule($rule, $arguments = [])
-    {
-        $assertion = new Assertion($this->value, $this->assertor);
-        $assertion->withRule($rule, $arguments);
-
-        $this->add($assertion);
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function add(Assertion $assertion): self
-    {
-        $this->assertions[] = $assertion;
-        end($this->assertions);
-        return $this;
-    }
-
-    public function current(): Assertion
-    {
-        return current($this->assertions);
-    }
-
-    /**
-     * @return Assertion[]
-     */
-    public function getAssertions(): array
-    {
-        return $this->assertions;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setValue($value): self
-    {
-        foreach ($this->assertions as $assertion) {
-            $assertion->value = $value;
-        }
-        return $this;
+        $this->setAssertor($assertor);
     }
 
     public function __call($name, $arguments)
     {
         if ($this->isRule($name)) {
-            $this->addRule($name, $arguments);
-            return $this;
+            $this->runAssertion($name, $arguments);
         }
-
-        $current = $this->current();
-        if (method_exists($current, $name)) {
-            $current->$name(...$arguments);
-            return $this;
-        }
-
-        return;
+        return $this;
     }
 
-    public function __destruct()
+    protected function runAssertion($name, $arguments)
     {
-        foreach ($this->assertions as $assertion) {
-            $assertion->value = $this->value;
-            Assertors::assert($assertion);
-        }
+        $assertion = new Assertion($this->value, $this->assertor);
+        $assertion->withRule($name, $arguments);
+
+        $assertion->value = $this->value;
+        $assertion->message = $this->message;
+        $assertion->exception = $this->exception;
+
+        Assertors::assert($assertion);
+        return $this;
     }
 }

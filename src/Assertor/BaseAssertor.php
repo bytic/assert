@@ -18,5 +18,4 @@ class BaseAssertor extends AbstractAssertor
             $this->reportInvalidArgument($message, $exception);
         }
     }
-
 }

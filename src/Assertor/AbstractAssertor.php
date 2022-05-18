@@ -2,12 +2,15 @@
 
 namespace Bytic\Assert\Assertor;
 
-use Bytic\Assert\Assertion;
+use Bytic\Assert\Assertions\Assertion;
 
 abstract class AbstractAssertor implements AssertorInterface
 {
     public function assert(Assertion $assertion): void
     {
+        if (false === $assertion->hasRule()) {
+            return;
+        }
         $method = $assertion->rule;
         $arguments = $assertion->arguments;
 
